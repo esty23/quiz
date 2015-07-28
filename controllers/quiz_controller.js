@@ -46,7 +46,24 @@ exports.answer = function(req, res) {
   res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
 };
 
+// GET /quizes/new
+exports.new = function(req, res) {
+	var quiz = models.Quiz.build( 	// crea el objeto quiz
+		{ pregunta: "Pregunta", respuesta: "Respuesta" }
+	);
+	res.render('quizes/new', { quiz: quiz });
+};
+
 // GET /author
 exports.author = function(req, res){
 	res.render('author', {});
+};
+
+// POST /quizes/create
+exports.create = function(req, res) {
+	var quiz = models.Quiz.build(req.body.quiz);
+	// guarda en bbdd los campos pregunta y respuesta de quiz
+	quiz.save({fields: ["pregunta", "respuesta"]}).then(function() {
+		res.redirect('/quizes');
+	}); 		// redirección HTTP a url relativo de lista de preguntas
 };
