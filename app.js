@@ -40,6 +40,20 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Auto-logout de sesión 
+app.use(function(req, res, next) {
+var tiempoInactivo = 120000; // 2minutos
+   if (req.session.user) {
+      if (Date.now() - req.session.user.loginDate > tiempoInactivo) {
+        delete req.session.user;
+      } else {
+	 //Si la sesión no ha expirado, actualizamos la variable loginDate
+         req.session.user.loginDate = Date.now();
+      }
+   }
+   next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
