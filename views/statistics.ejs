@@ -1,0 +1,9 @@
+<h1>Página de estadísticas</h1>
+
+<ul>
+  <li>El número de preguntas: <%= numPreguntas %></li>
+  <li>El número de comentarios totales: <%= comentariosTotal %></li>
+  <li>El número medio de comentarios por pregunta: <%= (comentariosTotal / numPreguntas).toFixed(2) %></li>
+  <li>El número de preguntas sin comentarios: <%= numPreguntas - pregConComentarios %></li>
+  <li>El número de preguntas con comentarios: <%= pregConComentarios %></li>
+</ul>

@@ -38,6 +38,29 @@ exports.index = function(req, res) {
   }
 };
 
+// GET /quizes/statistics
+exports.statistics = function(req, res) {
+var numPreguntas = 0;
+var numComentariosMedio = 0;
+var pregConComentarios = 0;
+   models.Quiz.count().then(
+   function(numPreguntas1) {
+      numPreguntas = numPreguntas1;
+      return models.Comment.count();
+   }).then(
+    function(comentariosTotal1) {
+      comentariosTotal = comentariosTotal1;
+      return models.Comment.preguntasConComentarios();
+   }).then(
+   function(pregConComentarios1) {
+      pregConComentarios = pregConComentarios1;
+   }).catch(
+     function(error) { next(error);
+   }).finally(function() {
+     res.render('statistics', { numPreguntas: numPreguntas, comentariosTotal: comentariosTotal, pregConComentarios: pregConComentarios, errors: [] });
+   });
+};
+
 // GET /quizes/:id
 exports.show = function(req, res) {
   res.render('quizes/show', { quiz: req.quiz, errors: [] });

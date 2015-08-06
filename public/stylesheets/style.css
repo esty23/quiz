@@ -8,6 +8,7 @@ section > div        { padding: 20px; }
 header, nav, section { background: #eee; text-align: center;}
 footer               { background: #eee; text-align: center;}
 nav span             { margin: 0px 10px 0px 0px;}
+ul                   { margin-left: 30px; padding: 20px; text-align: left; }
 
 #ErrorMsgs           { color: #f61; font-size: smaller}
 table                { width: 100%; border-radius: 10px; background: #ececec;  margin: 15px auto; }
